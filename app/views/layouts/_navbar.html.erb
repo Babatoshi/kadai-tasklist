@@ -1,1 +1,10 @@
-<a href="/">toppage</a>　　<%= link_to 'Signup', signup_path %>　　login
+<p><a href="/">toppage</a>　
+<% if logged_in? %>
+  <!--ログイン時-->
+  <%= link_to 'Logout', logout_path, method: :delete %>　
+  <%= current_user.name %>でログイン中　
+  <% else %>
+  <!--非ログイン時-->
+  <%= link_to 'Signup', signup_path %>　<%= link_to 'Login', login_path %>
+<% end %>
+</p>

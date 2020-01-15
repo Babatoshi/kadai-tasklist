@@ -1,13 +1,20 @@
 <h1>Tasklist</h1>
-利用にはログインが必要です。<%= link_to 'Sign up now!', signup_path %>
 
+<% unless logged_in? %>
+  <!--非ログイン時実行-->
 
-<!--以下ログイン時実行-->
-<!--<h1>タスクリスト一覧</h1>-->
-<!--<ul>-->
-<!--   <% @tasks.each do |task| %>-->
-<!--     <li><%= link_to task.id, task %> : <%= task.content %> --&gt <%= task.status %></li>-->
-<!--   <% end %>-->
-<!--</ul>-->
+  <p>利用にはログインが必要です。<%= link_to 'Sign up now!', signup_path %></p>
 
-<!--<%= link_to '新規タスクの投稿', new_task_path %>-->
+<% else %>
+  <!--ログイン時実行-->
+  <h1><%= current_user.name %>のタスクリスト一覧</h1>
+
+  <ul>
+     <% @tasks.each do |task| %>
+       <li><%= link_to task.id, task %> : <%= task.content %> --&gt <%= task.status %></li>
+     <% end %>
+  </ul>
+
+  <%= link_to '新規タスクの投稿', new_task_path %>
+
+<% end %>
